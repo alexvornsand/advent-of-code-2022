@@ -41,7 +41,7 @@ def makeFileSpace(log, partTwo=False):
             if lineage == '':
                 dictName = key
             else:
-                dictName = lineage + '-' + key
+                dictName = lineage + '/' + key
             dirDict[dictName] = 0
             if type(tree[key]) is dict:
                 for sub in tree[key].keys():
@@ -49,7 +49,7 @@ def makeFileSpace(log, partTwo=False):
                         dirDict[dictName] += tree[key][sub]
                     else:
                         subDict = navigateTree({sub: tree[key][sub]}, dictName)
-                        dirDict[dictName] += subDict[dictName + '-' + sub]
+                        dirDict[dictName] += subDict[dictName + '/' + sub]
                         dirDict.update(subDict)
         return(dirDict)      
 
