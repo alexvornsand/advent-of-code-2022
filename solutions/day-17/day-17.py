@@ -1,9 +1,13 @@
+# advent of code 2022
+# day 17
+
+# part 1
 import time
 import os
 
 wind = open('input.txt', 'r').read()[:-1]
-#wind = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
-def playTetris(wind, n=2022, printImage=False):
+
+def playTetris(wind, partTwo=False, n=2022):
     def checkCollisions(stack, currentRock, wind):
         rock = currentRock.copy()
         crashed = False
@@ -270,7 +274,7 @@ def playTetris(wind, n=2022, printImage=False):
                 elif (rock['pos'][0] + 2, rock['pos'][1]) in stack:
                     # crashed
                     pass
-                elif (rock['pos'][0] - 2, rock['pos'][1] + 1) in stack:
+                elif (rock['pos'][0] + 2, rock['pos'][1] + 1) in stack:
                     # crashed
                     pass
                 else:
@@ -340,29 +344,29 @@ def playTetris(wind, n=2022, printImage=False):
                 (rock['pos'][0], rock['pos'][1] + 1),
                 (rock['pos'][0] + 1, rock['pos'][1] + 1)
             ])
-    def printStack(stack, i, rock=[], m=0):
+    def printStack(stack, i, rock=[], m=0, rate=0.25):
         m = max(0, m)
         image = ''
         for r in range(m, m + 9)[::-1]:
             if r == m + 8:
-                image += str(i).ljust(6, ' ')
+                image += str(i + 1).ljust(10, ' ')
+            elif r == m + 7:
+                image += str(wind[w % modularity] + ' (' + str(w) + ')').ljust(10, ' ')
             else:
-                image += '      '
-            if r == m + 8:
-                image += ''
+                image += '          '
             if r == 0:
-                image += '+'
+                image += '+-'
             else:
-                image += '|'
+                image += '| '
             for c in range(1, 8):
                 if (c,r) in stack:
-                    image += '#'
+                    image += '# '
                 elif (c,r) in rock:
-                    image += '@'
+                    image += '@ '
                 elif r == 0:
-                    image += '-'
+                    image += '--'
                 else:
-                    image += '.'
+                    image += '. '
             if r == 0:
                 image += '+'
             else:
@@ -372,36 +376,52 @@ def playTetris(wind, n=2022, printImage=False):
             else:
                 image += '     '
             image += '\n'
+        image += '\n'
         os.system('cls')
-        print(image, end='\r')
-        if i == n:
-            time.slee(1)
-        elif i > n - 3:
-            time.sleep(.25)
+        print(image)
+        time.sleep(rate)
     modularity = len(wind)
     maxHeight = 0
     stack = []
     w = 0
-    maxHeights = []
-    for i in range(n):
+    i = 0
+    positionsHistory = []
+    while (True):
         currentRock = generateNextRock(maxHeight, i)
         crashed = False
-        if printImage == 'all':
-            printStack(stack, i, rockCoordinates(currentRock), currentRock['pos'][1] - 4)
         while(crashed is False):
             currentRock, crashed = checkCollisions(stack, currentRock, wind[w % modularity])
-            if printImage  == 'all':
-                printStack(stack, i, rockCoordinates(currentRock), currentRock['pos'][1] - 4)
             if crashed is True:
                 stack += rockCoordinates(currentRock)
+                currentState = ''
+                for r in range(maxHeight - 64, maxHeight + 4):
+                    for c in range(1, 8):
+                        if (c,r) in stack:
+                            currentState += '#'
+                        else:
+                            currentState += '.'
                 maxHeight = max([coord[1] for coord in stack])
-                maxHeights.append(maxHeight)
+                if currentState in positionsHistory and partTwo is True:
+                    cycleStart = positionsHistory.index(currentState)
+                    cycleEnd = i
+                    cycleLength = cycleEnd - cycleStart
+                    extraRocks = (1000000000000 - cycleStart) % cycleLength
+                    cycles = int((1000000000000 - cycleStart - extraRocks) / cycleLength)
+                    oldMaxHeight = maxHeight
+                    preamble = playTetris(wind, n = cycleStart + 1)
+                    cycleHeight = oldMaxHeight - preamble
+                    postamble = playTetris(wind, n = extraRocks + cycleStart) - preamble
+                    return(preamble + (cycles * cycleHeight) + postamble)
+                positionsHistory.append(currentState)
                 w += 1
-                if printImage == 'all':
-                    printStack(stack, i, rockCoordinates(currentRock), currentRock['pos'][1] - 4)
+                stack = [coord for coord in stack if coord[1] >= maxHeight - 64]
             else:
                 w += 1
-    if printImage == 'all' or printImage == 'last':
-        printStack(stack, i, m=currentRock['pos'][1] - 4)
-    return(maxHeight)
-playTetris(wind, 47, printImage = 'all')
+        i += 1
+        if partTwo is False and i == n:
+            return(maxHeight)
+
+playTetris(wind)
+
+# part 2
+playTetris(wind, True)
