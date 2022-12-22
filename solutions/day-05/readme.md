@@ -113,3 +113,37 @@ Finally, a single crate is still moved from stack 1 to stack 2, but now it's cra
 In this example, the CrateMover 9001 has put the crates in a totally different order: **`MCD`**.
 
 Before the rearrangement process finishes, update your simulation so that the Elves know where they should stand to be ready to unload the final supplies. **After the rearrangement procedure completes, what crate ends up on top of each stack?**
+
+#### [--- Solution ---](day-05.py)
+```Python
+# advent of code 2022
+# day 5
+
+# part 1
+import re
+
+stacks = open('input.txt', 'r').read().split('\n\n')[0].split('\n')[:-1]
+moves = open('input.txt', 'r').read().split('\n\n')[1].split('\n')[:-1]
+
+def collectSupplies(stacks, moves, partTwo=False):
+    stacksDict = {}
+    for i in range(9):
+        stacksDict[i + 1] = list(filter(lambda i: i != ' ', [stack[(4 * i + 1):(4 * i + 2)] for stack in stacks]))
+        
+    for move in moves:
+        moveIds = re.search(r"(\b\d+\b).+(\b\d+\b).+(\b\d+\b)", move)
+        n = int(moveIds.groups()[0])
+        s = int(moveIds.groups()[1])
+        d = int(moveIds.groups()[2])
+        if partTwo is False:
+            stacksDict[d] = stacksDict[s][:n][::-1] + stacksDict[d]
+        else:
+            stacksDict[d] = stacksDict[s][:n] + stacksDict[d]        
+        stacksDict[s] = stacksDict[s][n:]
+    return(''.join([stacksDict[i + 1][0] for i in range(9)]))
+
+collectSupplies(stacks, moves)
+
+# part 2
+collectSupplies(stacks, moves, True)
+```

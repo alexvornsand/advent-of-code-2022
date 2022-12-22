@@ -1,4 +1,4 @@
-# advent of code
+# advent of code 2022
 # day 1
 
 # part 1
@@ -14,4 +14,4 @@ def mostFoods(foods, partTwo=False):
 mostFoods(foods)
 
 # part 2
-mostFoods(foods, partTwo=True)
+mostFoods(foods, True)

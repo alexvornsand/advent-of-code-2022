@@ -1,4 +1,4 @@
-### --- Day 3: Rucksack Reorganization ---
+### [--- Day 3: Rucksack Reorganization ---](https://adventofcode.com/2022/day/3)
 
 One Elf has the important job of loading all of the [rucksacks](https://en.wikipedia.org/wiki/Rucksack) with supplies for the jungle journey. Unfortunately, that Elf didn't quite follow the packing instructions, and so a few items now need to be rearranged.
 
@@ -60,3 +60,24 @@ In the first group, the only item type that appears in all three rucksacks is lo
 Priorities for these items must still be found to organize the sticker attachment efforts: here, they are 18 (`r`) for the first group and 52 (`Z`) for the second group. The sum of these is **`70`**.
 
 Find the item type that corresponds to the badges of each three-Elf group. **What is the sum of the priorities of those item types?**
+
+#### [--- Solution ---](day-03.py)
+```Python
+# advent of code 2022
+# day 3
+
+# part 1
+napsacks = [(n[:int(1/2 * len(n))], n[int(1/2 * len(n)):]) for n in open('input.txt', 'r').read().split('\n')[:-1]]
+
+def countPriority(napsacks, partTwo=False):
+    alphaIndex = [chr(x) for x in range(97,123)] + [chr(x) for x in range(65,91)]
+    if partTwo is False:
+        return(sum([alphaIndex.index(list(set(n[0]).intersection(n[1]))[0]) + 1 for n in napsacks]))
+    else:
+        return(sum([alphaIndex.index(list(set(''.join(napsacks[3 * i])).intersection(''.join(napsacks[3 * i + 1])).intersection(''.join(napsacks[3 * i + 2])))[0]) + 1 for i in range(int(len(napsacks) / 3))]))
+
+countPriority(napsacks)
+
+# part 2
+countPriority(napsacks, True)
+```

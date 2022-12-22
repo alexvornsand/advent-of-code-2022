@@ -1,4 +1,4 @@
-### --- Day 4: Camp Cleanup ---
+### [--- Day 4: Camp Cleanup ---](https://adventofcode.com/2022/day/4)
 
 Space needs to be cleared before the last supplies can be unloaded from the ships, and so several Elves have been assigned the job of cleaning up sections of the camp. Every section has a unique **ID number**, and each Elf is assigned a range of section IDs.
 
@@ -57,3 +57,20 @@ In the above example, the first two pairs (`2-4,6-8` and `2-3,4-5`) don't overla
 So, in this example, the number of overlapping assignment pairs is **`4`**.
 
 **In how many assignment pairs do the ranges overlap?**
+
+#### [--- Solution ---](day-04.py)
+```Python
+# advent of code 2022
+# day 4
+
+# part 1
+assignments = [a.split(',') for a in open('input.txt', 'r').read().split('\n')[:-1]]
+
+def countOverlaps(assignments, partTwo=False):
+    return(sum([1 if len(r1.intersection(r2)) >= (min(len(r1), len(r2)) if partTwo is False else 1) else 0 for r1, r2 in [[set(list(range(int(section.split('-')[0]), int(section.split('-')[1]) + 1))) for section in pair] for pair in assignments]]))
+
+countOverlaps(assignments)
+
+# part 2
+countOverlaps(assignments, True)
+```

@@ -1,4 +1,4 @@
-### --- [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) ---
+### [--- Day 1: Calorie Counting ---](https://adventofcode.com/2022/day/1)
 
 Santa's reindeer typically eat regular reindeer food, but they need a lot of [magical energy](https://adventofcode.com/2018/day/25) to deliver presents on Christmas. For that, their favorite snack is a special type of **star** fruit that only grows deep in the jungle. The Elves have brought you on their annual expedition to the grove where the fruit grows.
 
@@ -50,9 +50,9 @@ In the example above, the top three Elves are the fourth Elf (with `24000` Calor
 
 **Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?**
 
-#### --- Solution ---
+#### [--- Solution ---](day-01.py)
 ```Python
-# advent of code
+# advent of code 2022
 # day 1
 
 # part 1
@@ -68,5 +68,5 @@ def mostFoods(foods, partTwo=False):
 mostFoods(foods)
 
 # part 2
-mostFoods(foods, partTwo=True)
+mostFoods(foods, True)
 ```

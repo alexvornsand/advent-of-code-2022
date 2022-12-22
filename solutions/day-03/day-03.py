@@ -1,4 +1,4 @@
-# advent of code
+# advent of code 2022
 # day 3
 
 # part 1

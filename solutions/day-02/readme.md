@@ -1,4 +1,4 @@
-### --- Day 2: Rock Paper Scissors ---
+### [--- Day 2: Rock Paper Scissors ---](https://adventofcode.com/2022/day/2)
 
 The Elves begin to set up camp on the beach. To decide whose tent gets to be closest to the snack storage, a giant [Rock Paper Scissors](https://en.wikipedia.org/wiki/Rock_paper_scissors) tournament is already in progress.
 
@@ -41,3 +41,31 @@ In the third round, you will defeat your opponent's Scissors with Rock for a sco
 Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total score of **`12`**.
 
 Following the Elf's instructions for the second column, **what would your total score be if everything goes exactly according to your strategy guide?**
+
+#### [--- Solution ---](day-02.py)
+```Python
+# advent of code 2022
+# day 2
+
+# part 1
+rounds = [r.split(' ') for r in open('input.txt', 'r').read().split('\n')[:-1]]
+
+def scoreRounds(rounds, partTwo=False):
+    intMap = {
+        'A':1,
+        'B':2,
+        'C':3,
+        'X':1,
+        'Y':2,
+        'Z':3
+    }
+    if partTwo is False:
+        return(sum([intMap[round[1]] + 3 * ((intMap[round[1]] - intMap[round[0]] + 1) % 3) for round in rounds]))
+    else: 
+        return(sum([(3 * intMap[round[1]]) + ((intMap[round[0]] + intMap[round[1]]) % 3) - 2 for round in rounds]))
+
+scoreRounds(rounds)
+
+# part 2
+scoreRounds(rounds, True)
+```
