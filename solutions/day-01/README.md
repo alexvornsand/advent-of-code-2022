@@ -49,3 +49,24 @@ To avoid this unacceptable situation, the Elves would instead like to know the t
 In the example above, the top three Elves are the fourth Elf (with `24000` Calories), then the third Elf (with `11000` Calories), then the fifth Elf (with `10000` Calories). The sum of the Calories carried by these three elves is **`45000`**.
 
 **Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?**
+
+#### --- Solution ---
+```Python
+# advent of code
+# day 1
+
+# part 1
+foods = [[int(f) for f in b.split('\n')] for b in open('input.txt', 'r').read()[:-1].split('\n\n')]
+
+def mostFoods(foods, partTwo=False):
+    if partTwo is True:
+        n = 3
+    else:
+        n = 1
+    return(sum(sorted([sum(food) for food in foods], reverse=True)[:n]))
+
+mostFoods(foods)
+
+# part 2
+mostFoods(foods, partTwo=True)
+```
