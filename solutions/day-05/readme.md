@@ -59,7 +59,7 @@ The Elves just need to know **which crate will end up on top of each stack**; in
 
 After the rearrangement procedure completes, what crate ends up on top of each stack?
 
-#### --- Part Two ---
+### --- Part Two ---
 
 As you watch the crane operator expertly rearrange the crates, you notice the process isn't following your prediction.
 
@@ -114,7 +114,7 @@ In this example, the CrateMover 9001 has put the crates in a totally different o
 
 Before the rearrangement process finishes, update your simulation so that the Elves know where they should stand to be ready to unload the final supplies. **After the rearrangement procedure completes, what crate ends up on top of each stack?**
 
-#### [--- Solution ---](day-05.py)
+### [--- Solution ---](day-05.py)
 ```Python
 # advent of code 2022
 # day 5

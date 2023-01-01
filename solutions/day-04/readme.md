@@ -44,7 +44,7 @@ Some of the pairs have noticed that one of their assignments fully contains the 
 
 **In how many assignment pairs does one range fully contain the other?**
 
-#### --- Part Two ---
+### --- Part Two ---
 
 It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to know the number of pairs that **overlap at all**.
 
@@ -58,7 +58,7 @@ So, in this example, the number of overlapping assignment pairs is **`4`**.
 
 **In how many assignment pairs do the ranges overlap?**
 
-#### [--- Solution ---](day-04.py)
+### [--- Solution ---](day-04.py)
 ```Python
 # advent of code 2022
 # day 4

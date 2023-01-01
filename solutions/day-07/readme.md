@@ -83,7 +83,7 @@ To begin, find all of the directories with a total size of **at most 100000**, t
 
 Find all of the directories with a total size of at most 100000. **What is the sum of the total sizes of those directories?**
 
-#### --- Part Two ---
+### --- Part Two ---
 
 Now, you're ready to choose a directory to delete.
 
@@ -101,7 +101,7 @@ Directories `e` and `a` are both too small; deleting them would not free up enou
 
 Find the smallest directory that, if deleted, would free up enough space on the filesystem to run the update. **What is the total size of that directory?**
 
-#### [--- Solution ---](day-07.py)
+### [--- Solution ---](day-07.py)
 ```Python
 # advent of code 2022
 # day 7

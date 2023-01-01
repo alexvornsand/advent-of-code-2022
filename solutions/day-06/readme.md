@@ -32,7 +32,7 @@ Here are a few more examples:
 
 **How many characters need to be processed before the first start-of-packet marker is detected?**
 
-#### --- Part Two ---
+### --- Part Two ---
 
 Your device's communication system is correctly detecting packets, but still isn't working. It looks like it also needs to look for **messages**.
 
@@ -48,7 +48,7 @@ Here are the first positions of start-of-message markers for all of the above ex
 
 **How many characters need to be processed before the first start-of-message marker is detected?**
 
-#### [--- Solution ---](day-06.py)
+### [--- Solution ---](day-06.py)
 ```Python
 # advent of code 2022
 # day 6
